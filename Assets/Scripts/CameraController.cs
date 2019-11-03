@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float CameraLagSpeed = 12.0f;
     [SerializeField] Vector3 Offset;  
     [SerializeField] float CameraRadius = 5.0f;
+    [SerializeField] float AimingRadius = 10.0f;
 
     Vector3 MousePos;
     Vector3 TargetCenter;
@@ -25,13 +26,24 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        MousePos.y = TargetCenter.y;
 
         DirectionVector = MousePos - TargetCenter;
         DirectionVector.Normalize();
-        CamPos = DirectionVector * CameraRadius;
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            CamPos = DirectionVector * AimingRadius;
+        }
+        else
+        {
+            CamPos = DirectionVector * CameraRadius;
+        }
+        
         CamPos.y = 27;
              
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, CamPos, 0.4f);
+        Player.rotation = Quaternion.LookRotation(DirectionVector);
     }
 
     void FixedUpdate()
