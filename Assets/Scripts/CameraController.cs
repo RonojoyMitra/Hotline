@@ -44,12 +44,14 @@ public class CameraController : MonoBehaviour
              
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, CamPos, 0.4f);
         Player.rotation = Quaternion.LookRotation(DirectionVector);
+
+        Vector3 TargetPosition = Player.position + Offset;
+        Vector3 SmoothedPosition = Vector3.Lerp(Target.position, TargetPosition, CameraLagSpeed * Time.deltaTime);
+        Target.position = SmoothedPosition;
     }
 
     void FixedUpdate()
     {
-        Vector3 TargetPosition = Player.position + Offset;
-        Vector3 SmoothedPosition = Vector3.Lerp(Target.position, TargetPosition, CameraLagSpeed * Time.deltaTime);
-        Target.position = SmoothedPosition;
+        
     }
 }
