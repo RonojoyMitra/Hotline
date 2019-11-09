@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] WeaponClass weapon;
+    [SerializeField] BoxCollider interactCollider;
+
     private Rigidbody rb;
     public float MoveSpeed = 5;
     // Start is called before the first frame update
@@ -32,6 +34,23 @@ public class PlayerMovement : MonoBehaviour
             if(weapon)
             {
                 weapon.Throw();
+                weapon = null;
+            }
+            else
+            {
+                Collider[] Items = Physics.OverlapBox(interactCollider.transform.position, interactCollider.size / 2);
+                foreach(Collider testCol in Items)
+                {
+                    GameObject pickupItem = testCol.gameObject;
+                    WeaponClass newWeapon = pickupItem.GetComponent<WeaponClass>();
+                    if (newWeapon)
+                    {
+                        weapon = newWeapon;
+                        weapon.gameObject.transform.SetParent(this.transform);
+                        // TODO orient weapon object to specified position and rotation
+                        weapon.PickedUp();
+                    }
+                }
             }
         }
     }

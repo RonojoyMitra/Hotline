@@ -26,7 +26,7 @@ public class WeaponClass : MonoBehaviour
     {
         if(gameObject.transform.parent != null)
         {
-            Vector3 LaunchDir = gameObject.transform.forward;
+            Vector3 LaunchDir = gameObject.transform.parent.forward;
             LaunchDir.Normalize();
 
             gameObject.transform.parent = null;
@@ -34,5 +34,10 @@ public class WeaponClass : MonoBehaviour
             rb.isKinematic = false;
             rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
         }
+    }
+
+    public void PickedUp()
+    {
+        rb.isKinematic = true;
     }
 }
