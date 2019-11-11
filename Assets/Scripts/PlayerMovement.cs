@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] WeaponClass weapon;
     [SerializeField] BoxCollider interactCollider;
+    [SerializeField] Transform weaponTransform;
 
     private Rigidbody rb;
     public float MoveSpeed = 5;
@@ -29,6 +30,14 @@ public class PlayerMovement : MonoBehaviour
 
         Movement(dir);
 
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if(weapon)
+            {
+                weapon.Use();
+            }
+        }
+
         if(Input.GetKeyDown(KeyCode.Mouse1))
         {
             if(weapon)
@@ -46,8 +55,9 @@ public class PlayerMovement : MonoBehaviour
                     if (newWeapon)
                     {
                         weapon = newWeapon;
-                        weapon.gameObject.transform.SetParent(this.transform);
-                        // TODO orient weapon object to specified position and rotation
+                        weapon.gameObject.transform.position = weaponTransform.position;
+                        weapon.gameObject.transform.rotation = weaponTransform.rotation;
+                        weapon.gameObject.transform.SetParent(weaponTransform);                      
                         weapon.PickedUp();
                     }
                 }
