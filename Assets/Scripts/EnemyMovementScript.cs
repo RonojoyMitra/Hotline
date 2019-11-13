@@ -15,10 +15,12 @@ public class EnemyMovementScript : MonoBehaviour
     private bool reachedPoint = false;
     private GameObject Player;
     private Vector2 lastPlayerPosition;
+    NavMeshAgent myAgent;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        myAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -34,23 +36,47 @@ public class EnemyMovementScript : MonoBehaviour
             MoveTowardsPlayer();
         }
 
-        if (reachedPoint)
-        {
-            destPoint = (destPoint + 1) % PatrolPoints.Length;
-            reachedPoint = false;
-        }
+        
     }
 
     void PatrolPath()
     {
-        transform.LookAt(PatrolPoints[destPoint].position);
-        transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[destPoint].position, enemySpeed * Time.deltaTime);
+        //transform.LookAt(PatrolPoints[destPoint].position);
+        //transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[destPoint].position, enemySpeed * Time.deltaTime);
+        Debug.Log(destPoint);
+        myAgent.destination = PatrolPoints[destPoint].position;
 
-        if (Vector3.Distance(transform.position, PatrolPoints[destPoint].position) == 0)
+        //if (Vector3.Distance(transform.position, PatrolPoints[destPoint].position) == 0)
+        //{
+        //    Debug.Log("reached point");
+        //    reachedPoint = true;
+        //    destPoint = (destPoint + 1) % PatrolPoints.Length;
+        //}
+        //destPoint = destPoint + 1;
+
+        if (myAgent.remainingDistance <= .2f)
         {
+            //destPoint = (destPoint + 1) % PatrolPoints.Length;
             Debug.Log("reached point");
             reachedPoint = true;
         }
+
+        if (destPoint >= PatrolPoints.Length)
+        {
+            destPoint = 0;
+        }
+
+        if (reachedPoint)
+        {
+            //destPoint = (destPoint + 1) % PatrolPoints.Length;
+            //destPoint = destPoint + 1;
+            Debug.Log("reached point");
+            destPoint = destPoint + 1;
+            reachedPoint = false;
+
+
+        }
+
     }
 
     void MoveTowardsPlayer()
