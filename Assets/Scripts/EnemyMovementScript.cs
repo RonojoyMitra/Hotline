@@ -5,16 +5,18 @@ using UnityEngine.AI;
 
 public class EnemyMovementScript : MonoBehaviour
 {
-    private Rigidbody rb;
+    private Rigidbody rb;   
+    private GameObject Player;
+    private Vector2 lastPlayerPosition;
     public Transform[] PatrolPoints;
+
     private bool patrolling = true;
     private bool canSeePlayer = false;
     public int destPoint = 0;
     public float enemySpeed = 5;
     public float enemyChaseSpeed = 8;
-    private bool reachedPoint = false;
-    private GameObject Player;
-    private Vector2 lastPlayerPosition;
+    private bool reachedPoint = false;   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +27,12 @@ public class EnemyMovementScript : MonoBehaviour
     void Update()
     {
         LookForPlayer();
+
         if(patrolling)
         {
             PatrolPath();
         }
+
         if (canSeePlayer)
         {
             MoveTowardsPlayer();
@@ -79,17 +83,17 @@ public class EnemyMovementScript : MonoBehaviour
         //}
 
         Ray lookRay = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-        float maxLookRayDistance = 10f;
+        RaycastHit Hit;
+        float maxRayDistance = 10f;
 
-        Debug.DrawRay(lookRay.origin, lookRay.direction * maxLookRayDistance, Color.blue);
+        Debug.DrawRay(lookRay.origin, lookRay.direction * maxRayDistance, Color.blue);
 
-        if (Physics.Raycast(lookRay, out hit, maxLookRayDistance))
+        if (Physics.Raycast(lookRay, out Hit, maxRayDistance))
         {
-            if (hit.transform.tag == "Player")
+            if (Hit.transform.tag == "Player")
             {
                 canSeePlayer = true;
-                Player = hit.collider.gameObject;
+                Player = Hit.collider.gameObject;
             }
         }
     }
