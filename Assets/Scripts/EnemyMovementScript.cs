@@ -43,8 +43,7 @@ public class EnemyMovementScript : MonoBehaviour
     {
         //transform.LookAt(PatrolPoints[destPoint].position);
         //transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[destPoint].position, enemySpeed * Time.deltaTime);
-        Debug.Log(destPoint);
-        myAgent.destination = PatrolPoints[destPoint].position;
+        // Debug.Log(destPoint);
 
         //if (Vector3.Distance(transform.position, PatrolPoints[destPoint].position) == 0)
         //{
@@ -61,10 +60,6 @@ public class EnemyMovementScript : MonoBehaviour
             reachedPoint = true;
         }
 
-        if (destPoint >= PatrolPoints.Length)
-        {
-            destPoint = 0;
-        }
 
         if (reachedPoint)
         {
@@ -77,6 +72,12 @@ public class EnemyMovementScript : MonoBehaviour
 
         }
 
+        if (destPoint >= PatrolPoints.Length)
+        {
+            destPoint = 0;
+        }
+
+        myAgent.destination = PatrolPoints[destPoint].position;
     }
 
     void MoveTowardsPlayer()
