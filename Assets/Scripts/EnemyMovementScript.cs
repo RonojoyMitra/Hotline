@@ -36,7 +36,13 @@ public class EnemyMovementScript : MonoBehaviour
             MoveTowardsPlayer();
         }
 
-        
+        if (myAgent.remainingDistance <= .2f)
+        {
+            //destPoint = (destPoint + 1) % PatrolPoints.Length;
+            Debug.Log("reached point");
+            reachedPoint = true;
+        }
+
     }
 
     void PatrolPath()
@@ -54,27 +60,22 @@ public class EnemyMovementScript : MonoBehaviour
         //}
         //destPoint = destPoint + 1;
 
-        if (myAgent.remainingDistance <= .2f)
-        {
-            //destPoint = (destPoint + 1) % PatrolPoints.Length;
-            Debug.Log("reached point");
-            reachedPoint = true;
-        }
+        
 
-        if (destPoint >= PatrolPoints.Length)
-        {
-            destPoint = 0;
-        }
+        
 
         if (reachedPoint)
         {
             //destPoint = (destPoint + 1) % PatrolPoints.Length;
             //destPoint = destPoint + 1;
-            Debug.Log("reached point");
+            //Debug.Log("reached point");
             destPoint = destPoint + 1;
             reachedPoint = false;
+        }
 
-
+        if (destPoint >= PatrolPoints.Length)
+        {
+            destPoint = 0;
         }
 
     }
