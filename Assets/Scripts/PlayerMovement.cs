@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
             // check if we have a weapon assigned to var
             if (weapon)
             {
+                // Change player sprite
+                // Instantiate separate weapon Prefab
                 weapon.Throw();
                 weapon = null;
             }
