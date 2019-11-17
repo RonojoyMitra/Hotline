@@ -65,8 +65,8 @@ public class EnemyMovementScript : MonoBehaviour
         {
             //destPoint = (destPoint + 1) % PatrolPoints.Length;
             //destPoint = destPoint + 1;
-            Debug.Log("reached point");
-            destPoint = destPoint + 1;
+            Debug.Log("incrementpoint");
+            destPoint = (destPoint + 1);
             reachedPoint = false;
 
 
