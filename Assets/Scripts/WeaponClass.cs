@@ -10,7 +10,7 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] float throwForce;
     [SerializeField] Sprite weaponSprite;
     [SerializeField] Animator animator;
-    [SerializeField] BoxCollider boxCollider;
+    [SerializeField] BoxCollider meleeCollider;
 
     Rigidbody rb;
 
@@ -25,9 +25,8 @@ public class WeaponClass : MonoBehaviour
         //TODO add animation call here
 
         if (!IsGun)
-        {
-            
-            Collider[] targets = Physics.OverlapBox(boxCollider.transform.position, boxCollider.size / 2);
+        {         
+            Collider[] targets = Physics.OverlapBox(meleeCollider.transform.position, meleeCollider.size / 2);
 
             foreach(Collider test in targets)
             {
@@ -41,7 +40,7 @@ public class WeaponClass : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("healtComp not found");
+                    Debug.Log("healthComp not found");
                 }
             }
         }        
