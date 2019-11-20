@@ -15,7 +15,7 @@ public class WeaponClass : MonoBehaviour
     Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -43,7 +43,7 @@ public class WeaponClass : MonoBehaviour
                     Debug.Log("healthComp not found");
                 }
             }
-        }        
+        }
     }
 
     public virtual void Throw()
@@ -59,14 +59,28 @@ public class WeaponClass : MonoBehaviour
             gameObject.transform.parent = null;
 
             // make this object use physics and throw
-            rb.isKinematic = false;
-            rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
+            if(rb)
+            {
+                rb.isKinematic = false;
+                rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.Log("Rigidbody not found");
+            }         
         }
     }
 
     public void PickedUp()
     {
         // called when picking up object to reset it to kinematic
-        rb.isKinematic = true;
+        if(rb)
+        {
+            rb.isKinematic = true;
+        }
+        else
+        {
+            Debug.Log("Rigidbody not found");
+        }
     }
 }

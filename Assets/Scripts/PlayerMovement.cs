@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
                 // Instantiate separate weapon Prefab
                 weapon.Throw();
                 weapon = null;
-                PickUp();
+                Invoke("PickUp", 0.1f);
             }
             else
             {
@@ -79,16 +79,19 @@ public class PlayerMovement : MonoBehaviour
         Collider[] Items = Physics.OverlapBox(interactCollider.transform.position, interactCollider.size / 2);
         foreach (Collider testCol in Items)
         {
-            GameObject pickupItem = testCol.gameObject;
-            WeaponClass newWeapon = pickupItem.GetComponent<WeaponClass>();
-            if (newWeapon)
+            if(weapon == null)
             {
-                weapon = newWeapon;
-                weapon.gameObject.transform.position = weaponTransform.position;
-                weapon.gameObject.transform.rotation = weaponTransform.rotation;
-                weapon.gameObject.transform.SetParent(weaponTransform);
-                weapon.PickedUp();
-            }
+                GameObject pickupItem = testCol.gameObject;
+                WeaponClass newWeapon = pickupItem.GetComponent<WeaponClass>();
+                if (newWeapon)
+                {
+                    weapon = newWeapon;
+                    weapon.gameObject.transform.position = weaponTransform.position;
+                    weapon.gameObject.transform.rotation = weaponTransform.rotation;
+                    weapon.gameObject.transform.SetParent(weaponTransform);
+                    weapon.PickedUp();
+                }
+            }           
         }
     }
 }

@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] float bulletForce = 2500.0f;
+    Vector3 parentForward;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<Rigidbody>().AddForce(-transform.up * bulletForce);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -30,5 +26,7 @@ public class Bullets : MonoBehaviour
         {
             Debug.Log("healtComp not found");
         }
+
+        Destroy(this.gameObject);
     }
 }

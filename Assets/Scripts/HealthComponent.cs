@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
+    PointManager PM;
+
+    private void Start()
+    {
+        PM = GameObject.FindGameObjectWithTag("PointManager").GetComponent<PointManager>();
+    }
+
     public void HandleHit(bool IsBluntHit)
     {
         if (IsBluntHit)
@@ -12,7 +19,13 @@ public class HealthComponent : MonoBehaviour
         }
         else
         {
+            if(!this.gameObject.CompareTag("Player"))
+            {
+                PM.AddComboCount();
+            }           
+            
             //play blood FX
+            //TODO disable gameobject instead of destroying
             Destroy(this.gameObject);
         }
     }
