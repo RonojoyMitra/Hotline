@@ -5,56 +5,79 @@ using UnityEngine.AI;
 
 public class EnemyMovementScript : MonoBehaviour
 {
-    private Rigidbody rb;   
-    private GameObject Player;
-    private Vector2 lastPlayerPosition;
+    private Rigidbody rb;
     public Transform[] PatrolPoints;
-
     private bool patrolling = true;
     private bool canSeePlayer = false;
     public int destPoint = 0;
     public float enemySpeed = 5;
     public float enemyChaseSpeed = 8;
-    private bool reachedPoint = false;   
-
+    private bool reachedPoint = false;
+    private GameObject Player;
+    private Vector2 lastPlayerPosition;
+    NavMeshAgent myAgent;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        myAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
         LookForPlayer();
-
         if(patrolling)
         {
             PatrolPath();
         }
-
         if (canSeePlayer)
         {
             MoveTowardsPlayer();
         }
 
-        if (reachedPoint)
-        {
-            destPoint = (destPoint + 1) % PatrolPoints.Length;
-            reachedPoint = false;
-        }
+        
     }
 
     void PatrolPath()
     {
-        transform.LookAt(PatrolPoints[destPoint].position);
-        transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[destPoint].position, enemySpeed * Time.deltaTime);
+        //transform.LookAt(PatrolPoints[destPoint].position);
+        //transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[destPoint].position, enemySpeed * Time.deltaTime);
+        // Debug.Log(destPoint);
 
-        if (Vector3.Distance(transform.position, PatrolPoints[destPoint].position) == 0)
+        //if (Vector3.Distance(transform.position, PatrolPoints[destPoint].position) == 0)
+        //{
+        //    Debug.Log("reached point");
+        //    reachedPoint = true;
+        //    destPoint = (destPoint + 1) % PatrolPoints.Length;
+        //}
+        //destPoint = destPoint + 1;
+
+        if (myAgent.remainingDistance <= .2f)
         {
+            //destPoint = (destPoint + 1) % PatrolPoints.Length;
             Debug.Log("reached point");
             reachedPoint = true;
         }
+
+
+        if (reachedPoint)
+        {
+            //destPoint = (destPoint + 1) % PatrolPoints.Length;
+            //destPoint = destPoint + 1;
+            Debug.Log("incrementpoint");
+            destPoint = (destPoint + 1);
+            reachedPoint = false;
+
+
+        }
+
+        if (destPoint >= PatrolPoints.Length)
+        {
+            destPoint = 0;
+        }
+
+        myAgent.destination = PatrolPoints[destPoint].position;
     }
 
     void MoveTowardsPlayer()
@@ -83,17 +106,17 @@ public class EnemyMovementScript : MonoBehaviour
         //}
 
         Ray lookRay = new Ray(transform.position, transform.forward);
-        RaycastHit Hit;
-        float maxRayDistance = 10f;
+        RaycastHit hit;
+        float maxLookRayDistance = 10f;
 
-        Debug.DrawRay(lookRay.origin, lookRay.direction * maxRayDistance, Color.blue);
+        Debug.DrawRay(lookRay.origin, lookRay.direction * maxLookRayDistance, Color.blue);
 
-        if (Physics.Raycast(lookRay, out Hit, maxRayDistance))
+        if (Physics.Raycast(lookRay, out hit, maxLookRayDistance))
         {
-            if (Hit.transform.tag == "Player")
+            if (hit.transform.tag == "Player")
             {
                 canSeePlayer = true;
-                Player = Hit.collider.gameObject;
+                Player = hit.collider.gameObject;
             }
         }
     }

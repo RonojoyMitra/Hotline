@@ -48,6 +48,7 @@ public class WeaponClass : MonoBehaviour
 
     public virtual void Throw()
     {
+        //TODO
         if(gameObject.transform.parent != null)
         {
             // get forward direction from parent object
