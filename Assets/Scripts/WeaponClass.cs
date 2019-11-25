@@ -10,12 +10,12 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] float throwForce;
     [SerializeField] Sprite weaponSprite;
     [SerializeField] Animator animator;
-    [SerializeField] BoxCollider boxCollider;
+    [SerializeField] BoxCollider meleeCollider;
 
     Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -25,9 +25,8 @@ public class WeaponClass : MonoBehaviour
         //TODO add animation call here
 
         if (!IsGun)
-        {
-            
-            Collider[] targets = Physics.OverlapBox(boxCollider.transform.position, boxCollider.size / 2);
+        {         
+            Collider[] targets = Physics.OverlapBox(meleeCollider.transform.position, meleeCollider.size / 2);
 
             foreach(Collider test in targets)
             {
@@ -41,14 +40,15 @@ public class WeaponClass : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("healtComp not found");
+                    Debug.Log("healthComp not found");
                 }
             }
-        }        
+        }
     }
 
     public virtual void Throw()
     {
+        //TODO
         if(gameObject.transform.parent != null)
         {
             // get forward direction from parent object
@@ -59,14 +59,28 @@ public class WeaponClass : MonoBehaviour
             gameObject.transform.parent = null;
 
             // make this object use physics and throw
-            rb.isKinematic = false;
-            rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
+            if(rb)
+            {
+                rb.isKinematic = false;
+                rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.Log("Rigidbody not found");
+            }         
         }
     }
 
     public void PickedUp()
     {
         // called when picking up object to reset it to kinematic
-        rb.isKinematic = true;
+        if(rb)
+        {
+            rb.isKinematic = true;
+        }
+        else
+        {
+            Debug.Log("Rigidbody not found");
+        }
     }
 }
