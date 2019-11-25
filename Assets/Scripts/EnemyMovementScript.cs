@@ -27,7 +27,7 @@ public class EnemyMovementScript : MonoBehaviour
     void Update()
     {
         LookForPlayer();
-        if(patrolling)
+        if(patrolling && PatrolPoints.Length != 0)
         {
             PatrolPath();
         }
@@ -52,7 +52,9 @@ public class EnemyMovementScript : MonoBehaviour
         //    destPoint = (destPoint + 1) % PatrolPoints.Length;
         //}
         //destPoint = destPoint + 1;
+        
 
+        //patrols the points set in PatrolPoints
         if (myAgent.remainingDistance <= .2f)
         {
             //destPoint = (destPoint + 1) % PatrolPoints.Length;
@@ -82,6 +84,7 @@ public class EnemyMovementScript : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
+        //Moves towards player
         patrolling = false;
         transform.LookAt(Player.transform.position);
         //transform.Rotate(new Vector3(0, -90, 0), Space.Self);
@@ -105,6 +108,8 @@ public class EnemyMovementScript : MonoBehaviour
         //    Debug.Log(canSeePlayer);
         //}
 
+
+        //casts a ray that looks for the player
         Ray lookRay = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         float maxLookRayDistance = 10f;
