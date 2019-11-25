@@ -12,7 +12,7 @@ public class GunScript : WeaponClass
     protected override void Start()
     {
         base.Start();
-
+        IsGun = true;
         ammoCount = magSize;
     }
 

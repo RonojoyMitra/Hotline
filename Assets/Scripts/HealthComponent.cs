@@ -22,6 +22,7 @@ public class HealthComponent : MonoBehaviour
             if(!this.gameObject.CompareTag("Player"))
             {
                 PM.AddComboCount();
+                PM.AddPoints(this.gameObject.transform.position);
             }           
             
             //play blood FX

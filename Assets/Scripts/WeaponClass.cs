@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponClass : MonoBehaviour
 {
     [SerializeField] bool IsBlunt;
-    [SerializeField] bool IsGun;
+    [SerializeField] protected bool IsGun;
     [SerializeField] float useResetTime;
     [SerializeField] float throwForce;
     [SerializeField] Sprite weaponSprite;
