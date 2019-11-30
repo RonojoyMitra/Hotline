@@ -8,6 +8,7 @@ public class PointManager : MonoBehaviour
     public int totalScore;
     [SerializeField] float ComboTimeFrame = 2.0f;
     [SerializeField] GameObject pointText;
+    [SerializeField] GameObject textCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -21,9 +22,14 @@ public class PointManager : MonoBehaviour
         
     }
 
-    public void AddPoints(Vector2 pointLocation)
+    public void AddPoints(Vector3 pointLocation)
     {
+        Vector3 ScreenLocation = Camera.main.WorldToScreenPoint(pointLocation);
 
+        GameObject textObject = Instantiate(pointText);
+        textObject.transform.SetParent(textCanvas.transform);
+
+        textObject.transform.position = ScreenLocation;
     }
 
     public void AddComboCount()
