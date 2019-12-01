@@ -10,16 +10,16 @@ public class PointManager : MonoBehaviour
     public int totalScore;
 
     [SerializeField] GameObject playerChar;
-
-    [SerializeField] float ComboTimeFrame = 2.0f;
     [SerializeField] GameObject pointTextPrefab;
     [SerializeField] GameObject comboTextPrefab;
     [SerializeField] TextMeshProUGUI totalScoreText;
     [SerializeField] GameObject textCanvas;
     [SerializeField] GameObject floatingCanvasPrefab;
 
-    [SerializeField] int EnemyPointsValue = 300;
+    [SerializeField] float ComboTimeFrame = 2.0f;
     [SerializeField] float comboMultiplier = 1.25f;
+    [SerializeField] int EnemyPointsValue = 300;
+    [SerializeField] float textScale = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,16 +39,19 @@ public class PointManager : MonoBehaviour
     {
         // Create temporary canvas for floating point text, and create point text object       
         GameObject floatingCanvas = Instantiate(floatingCanvasPrefab);
-        floatingCanvas.transform.position = Camera.main.transform.position - (Vector3.down);
+        floatingCanvas.transform.position = Camera.main.transform.position + (Vector3.down * 2.5f);
         GameObject textObject = Instantiate(pointTextPrefab);
 
         // Set a bunch of transform parameters so that point text will appear on screen properly
         textObject.transform.SetParent(floatingCanvas.transform);
         textObject.transform.rotation = textObject.transform.parent.rotation;
-        textObject.transform.localScale = textObject.transform.parent.localScale * 5;
+        textObject.transform.localScale = textObject.transform.parent.localScale * textScale;
 
+        Vector3 pos = pointLocation;
+        pos.y = floatingCanvas.transform.position.y;
         // TODO fix position y to prevent clipping
-        textObject.transform.position = pointLocation;
+        textObject.transform.position = pos;
+        
 
         Destroy(floatingCanvas, 1.25f);
 
@@ -76,7 +79,7 @@ public class PointManager : MonoBehaviour
         // Debug.Log(ComboCount);
 
         GameObject floatingCanvas = Instantiate(floatingCanvasPrefab);
-        floatingCanvas.transform.position = Camera.main.transform.position - (Vector3.down);
+        floatingCanvas.transform.position = Camera.main.transform.position + (Vector3.down * 2.5f);
 
         GameObject textObject = Instantiate(comboTextPrefab);
         textObject.transform.SetParent(floatingCanvas.transform);
@@ -84,8 +87,12 @@ public class PointManager : MonoBehaviour
         // Set a bunch of transform parameters so that text will appear on screen properly
         textObject.transform.SetParent(floatingCanvas.transform);
         textObject.transform.rotation = textObject.transform.parent.rotation;
-        textObject.transform.localScale = textObject.transform.parent.localScale * 5;
-        textObject.transform.position = playerChar.transform.position;
+        textObject.transform.localScale = textObject.transform.parent.localScale * textScale;
+
+        Vector3 pos = playerChar.transform.position;
+        pos.y = floatingCanvas.transform.position.y;
+        // TODO fix position y to prevent clipping
+        textObject.transform.position = pos;
 
         Destroy(textObject, 1.25f);
 

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
+    [SerializeField] Animator animator;
+
     PointManager PM;
+
+    bool IsDead = false;
 
     private void Start()
     {
@@ -19,15 +23,45 @@ public class HealthComponent : MonoBehaviour
         }
         else
         {
-            if(!this.gameObject.CompareTag("Player"))
+            if(!IsDead)
             {
-                PM.AddComboCount();
-                PM.AddPoints(this.gameObject.transform.position);
-            }           
-            
-            //play blood FX
-            //TODO disable gameobject instead of destroying
-            Destroy(this.gameObject);
-        }
+                // disable collider
+                GetComponent<Collider>().enabled = false;
+
+                // count points
+                if (!this.gameObject.CompareTag("Player"))
+                {
+                    PM.AddComboCount();
+                    PM.AddPoints(this.gameObject.transform.position);
+
+                    // disable the healthcomp when dead
+                    IsDead = true;
+                }
+
+                // TODO disable gameobject instead of destroying
+
+                // Destroy(this.gameObject);
+                if (this.gameObject.CompareTag("enemy"))
+                {
+                    GetComponent<EnemyMovementScript>().myAgent.isStopped = true;
+                    GetComponent<Rigidbody>().isKinematic = true;
+                    
+                    // TODO set object rotation to face source of hit
+
+                    // debug messages to notify if animator status
+                    if (animator)
+                    {
+                        Debug.Log("Animator found");
+                    }
+                    else
+                    {
+                        Debug.Log("Animator not found");
+                    }
+
+                    // play blood FX
+                    animator.SetTrigger("Death");
+                }
+            }
+        }          
     }
 }

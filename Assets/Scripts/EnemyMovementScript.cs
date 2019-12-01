@@ -15,7 +15,8 @@ public class EnemyMovementScript : MonoBehaviour
     private bool reachedPoint = false;
     private GameObject Player;
     private Vector2 lastPlayerPosition;
-    NavMeshAgent myAgent;
+    public NavMeshAgent myAgent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +35,7 @@ public class EnemyMovementScript : MonoBehaviour
         if (canSeePlayer)
         {
             MoveTowardsPlayer();
-        }
-
-        
+        }    
     }
 
     void PatrolPath()
@@ -70,8 +69,6 @@ public class EnemyMovementScript : MonoBehaviour
             Debug.Log("incrementpoint");
             destPoint = (destPoint + 1);
             reachedPoint = false;
-
-
         }
 
         if (destPoint >= PatrolPoints.Length)
