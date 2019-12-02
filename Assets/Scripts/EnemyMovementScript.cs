@@ -16,6 +16,10 @@ public class EnemyMovementScript : MonoBehaviour
     private GameObject Player;
     private Vector2 lastPlayerPosition;
     NavMeshAgent myAgent;
+    //WeaponClass weapon;
+    public bool HasGun = false;
+    public GameObject bullet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +35,14 @@ public class EnemyMovementScript : MonoBehaviour
         {
             PatrolPath();
         }
-        if (canSeePlayer)
+        if (canSeePlayer && !HasGun)
         {
             MoveTowardsPlayer();
         }
-
-        
+        if (canSeePlayer && HasGun)
+        {
+            ShootAtPlayer();
+        }
     }
 
     void PatrolPath()
@@ -90,6 +96,19 @@ public class EnemyMovementScript : MonoBehaviour
         //transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
         transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, enemyChaseSpeed * Time.deltaTime);
+    }
+
+    void ShootAtPlayer()
+    {
+        patrolling = false;
+        transform.LookAt(Player.transform.position);
+        GameObject projectile = Instantiate(bullet);
+        projectile.transform.position = transform.position;
+
+        Quaternion projectileRot = transform.rotation;
+        projectile.transform.rotation = Quaternion.Euler(projectileRot.eulerAngles.x + -90, projectileRot.eulerAngles.y,
+            projectileRot.eulerAngles.z);
+        //weapon.Use();
     }
 
     void LookForPlayer()
