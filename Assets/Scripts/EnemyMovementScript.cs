@@ -19,6 +19,7 @@ public class EnemyMovementScript : MonoBehaviour
     //WeaponClass weapon;
     public bool HasGun = false;
     public GameObject bullet;
+    public Transform muzzle;
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +104,7 @@ public class EnemyMovementScript : MonoBehaviour
         patrolling = false;
         transform.LookAt(Player.transform.position);
         GameObject projectile = Instantiate(bullet);
-        projectile.transform.position = transform.position;
+        projectile.transform.position = transform.position + new Vector3(1,1,1);
 
         Quaternion projectileRot = transform.rotation;
         projectile.transform.rotation = Quaternion.Euler(projectileRot.eulerAngles.x + -90, projectileRot.eulerAngles.y,
