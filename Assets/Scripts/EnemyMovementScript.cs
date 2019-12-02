@@ -5,37 +5,51 @@ using UnityEngine.AI;
 
 public class EnemyMovementScript : MonoBehaviour
 {
-    private Rigidbody rb;
+    Rigidbody rb; 
+    GameObject Player;
+    Vector2 lastPlayerPosition;
     public Transform[] PatrolPoints;
-    private bool patrolling = true;
-    private bool canSeePlayer = false;
+    public NavMeshAgent myAgent;
+
+    bool reachedPoint = false;
+    bool IsPatrolling = true;
+    bool canSeePlayer = false;
     public int destPoint = 0;
     public float enemySpeed = 5;
     public float enemyChaseSpeed = 8;
-    private bool reachedPoint = false;
-    private GameObject Player;
-    private Vector2 lastPlayerPosition;
-    public NavMeshAgent myAgent;
+
+    HealthComponent healthComp;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         myAgent = GetComponent<NavMeshAgent>();
+        healthComp = GetComponent<HealthComponent>();
+
+        if(healthComp)
+        {
+            Debug.Log("HealthComp found on enemy");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        LookForPlayer();
-        if(patrolling && PatrolPoints.Length != 0)
+        if(!healthComp.IsDead)
         {
-            PatrolPath();
-        }
-        if (canSeePlayer)
-        {
-            MoveTowardsPlayer();
-        }    
+            LookForPlayer();
+
+            if (IsPatrolling && PatrolPoints.Length != 0)
+            {
+                PatrolPath();
+            }
+
+            if (canSeePlayer)
+            {
+                MoveTowardsPlayer();
+            }
+        }         
     }
 
     void PatrolPath()
@@ -82,7 +96,7 @@ public class EnemyMovementScript : MonoBehaviour
     void MoveTowardsPlayer()
     {
         //Moves towards player
-        patrolling = false;
+        IsPatrolling = false;
         transform.LookAt(Player.transform.position);
         //transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
