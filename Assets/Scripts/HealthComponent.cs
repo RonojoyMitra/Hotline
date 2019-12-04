@@ -8,7 +8,7 @@ public class HealthComponent : MonoBehaviour
 
     PointManager PM;
 
-    bool IsDead = false;
+    public bool IsDead = false;
 
     private void Start()
     {
