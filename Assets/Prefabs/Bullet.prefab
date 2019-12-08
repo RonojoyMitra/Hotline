@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2992e66ccceb98741883df19cdf111d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletForce: 3500
+  bulletForce: 5000
 --- !u!1 &7230149548967770143
 GameObject:
   m_ObjectHideFlags: 0

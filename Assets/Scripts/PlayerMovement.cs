@@ -9,8 +9,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform weaponTransform;
     [SerializeField] Animator bodyAnimator;
     [SerializeField] Animator feetAnimator;
+    [SerializeField] float enemyDetectionDistance = 40.0f;
 
-    private Rigidbody rb;
+    HealthComponent healthComp;
+    Rigidbody rb;
     public float MoveSpeed = 5;
 
     bool SetWalk = false;
@@ -19,19 +21,19 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        if(weapon)
-        {
-            weapon.gameObject.transform.parent = this.gameObject.transform;
-        }
+        healthComp = GetComponent<HealthComponent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        UseWeapon();
-        ThrowPickupWeapon();  
+        // if not dead allow input
+        if(!healthComp.IsDead)
+        {
+            Movement();
+            UseWeapon();
+            ThrowPickupWeapon();
+        }       
     }
 
     void Movement()
@@ -46,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 bodyAnimator.SetBool("IsWalking", true);
                 feetAnimator.SetBool("IsWalking", true);
-                Debug.Log("Set Walking to True");
+                //Debug.Log("Set Walking to True");
                 SetWalk = true;
             }
             
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             bodyAnimator.SetBool("IsWalking", false);
             feetAnimator.SetBool("IsWalking", false);
-            Debug.Log("Set Walking to false");
+            //Debug.Log("Set Walking to false");
             SetWalk = false;
         }
 
@@ -71,6 +73,18 @@ public class PlayerMovement : MonoBehaviour
             // check if we have a weapon assigned to var
             if (weapon)
             {
+                if(weapon.IsGun)
+                {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+                    foreach(GameObject test in enemies)
+                    {
+                        if(Vector3.Distance(test.transform.position, this.transform.position) <= enemyDetectionDistance)
+                        {
+                            test.GetComponent<EnemyMovementScript>().heardPlayer = true;
+                        }
+                    }
+                }
+
                 weapon.Use();
             }
         }

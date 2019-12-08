@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class WeaponClass : MonoBehaviour
 {
-    [SerializeField] protected bool IsBlunt;
-    [SerializeField] protected bool IsGun;
+    [SerializeField] protected bool IsBlunt;   
     [SerializeField] protected float useResetTime;
-    [SerializeField] protected float throwForce;
-    [SerializeField] protected BoxCollider meleeCollider;
+    [SerializeField] protected float throwForce;   
     [SerializeField] protected string animTriggerName;
     [SerializeField] protected string animBoolName;
     [SerializeField] protected SpriteRenderer weaponSprite;
+    [SerializeField] protected Collider pickUpCollider;
+    [SerializeField] protected BoxCollider meleeCollider;
+
+    public bool IsGun;    
+    protected bool IsReseting = false;
 
     protected Animator animator;
-    bool IsReseting = false;
-
     Rigidbody rb;
 
     // Start is called before the first frame update
@@ -29,7 +30,7 @@ public class WeaponClass : MonoBehaviour
         if(!IsReseting)
         {
             //TODO add animation call here
-            animator.SetTrigger(animTriggerName);
+            //animator.SetTrigger(animTriggerName);
 
             // set reseting boolean so that player must wait before swinging or shooting again
             IsReseting = true;
@@ -80,6 +81,7 @@ public class WeaponClass : MonoBehaviour
             gameObject.transform.parent = null;
 
             weaponSprite.enabled = true;
+            pickUpCollider.enabled = true;
 
             // make this object use physics and throw
             if (rb)
@@ -100,9 +102,14 @@ public class WeaponClass : MonoBehaviour
         if(rb)
         {
             rb.isKinematic = true;
+            pickUpCollider.enabled = false;
             weaponSprite.enabled = false;
-            animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
-            animator.SetBool(animBoolName, true);
+
+            if (transform.parent.parent.tag == "Player")
+            {
+                animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
+                animator.SetBool(animBoolName, true);
+            }
         }
         else
         {
