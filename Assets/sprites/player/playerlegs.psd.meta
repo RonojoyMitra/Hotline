@@ -1,7 +1,43 @@
 fileFormatVersion: 2
 guid: 79b4ab7aea45dca45acb21f19da01675
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2724137404475214240
+    second: playerlegs_0
+  - first:
+      213: 2004286509331914547
+    second: playerlegs_1
+  - first:
+      213: 1601439439547365205
+    second: playerlegs_2
+  - first:
+      213: 726195330167355478
+    second: playerlegs_3
+  - first:
+      213: -8679218004368381592
+    second: playerlegs_4
+  - first:
+      213: 4090872375024413396
+    second: playerlegs_5
+  - first:
+      213: -5069325581756011947
+    second: playerlegs_6
+  - first:
+      213: -7577804406858292431
+    second: playerlegs_7
+  - first:
+      213: -8804569752755336896
+    second: playerlegs_8
+  - first:
+      213: 4073939580123200082
+    second: playerlegs_9
+  - first:
+      213: -1703541694337227350
+    second: playerlegs_10
+  - first:
+      213: -2537119122947165706
+    second: playerlegs_11
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -132,11 +168,137 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: playerlegs_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 30
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04e166cac288fb94db3c4dabfc6b6903
+      internalID: 2724137404475214240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerlegs_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 30
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c3e9b230152e6459dab50de571b1ec
+      internalID: 2004286509331914547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerlegs_2
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 30
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dacf1d8388a82ab4eb7ad564569c9220
+      internalID: 1601439439547365205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerlegs_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 22
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79ad0a0df5238cb40ab1120cec71da36
+      internalID: 726195330167355478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerlegs_4
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 3
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f757c921d5e4b1479fbb9f6b015c4e9
+      internalID: -8679218004368381592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: playerlegs_5
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 6
+        width: 18
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 980c8da410b5f434cab2af16c8126fae
+      internalID: 4090872375024413396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 173d95187055e2e47b260b2708c41700
     internalID: 0
     vertices: []
     indices: 

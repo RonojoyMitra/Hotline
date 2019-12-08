@@ -132,7 +132,7 @@ public class EnemyMovementScript : MonoBehaviour
             if (hit.transform.tag == "Player")
             {
                 canSeePlayer = true;
-                Debug.Log("canseeplayer");
+                //Debug.Log("canseeplayer");
                 Player = hit.collider.gameObject;
             }
         }

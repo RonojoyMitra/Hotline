@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class WeaponClass : MonoBehaviour
 {
-    [SerializeField] bool IsBlunt;
+    [SerializeField] protected bool IsBlunt;
     [SerializeField] protected bool IsGun;
-    [SerializeField] float useResetTime;
-    [SerializeField] float throwForce;
-    [SerializeField] Sprite weaponSprite;
-    [SerializeField] Animator animator;
-    [SerializeField] BoxCollider meleeCollider;
+    [SerializeField] protected float useResetTime;
+    [SerializeField] protected float throwForce;
+    [SerializeField] protected BoxCollider meleeCollider;
+    [SerializeField] protected string animTriggerName;
+    [SerializeField] protected string animBoolName;
+    [SerializeField] protected SpriteRenderer weaponSprite;
+
+    protected Animator animator;
+    bool IsReseting = false;
 
     Rigidbody rb;
 
@@ -22,28 +26,42 @@ public class WeaponClass : MonoBehaviour
 
     public virtual void Use()
     {
-        //TODO add animation call here
+        if(!IsReseting)
+        {
+            //TODO add animation call here
+            animator.SetTrigger(animTriggerName);
 
-        if (!IsGun)
-        {         
-            Collider[] targets = Physics.OverlapBox(meleeCollider.transform.position, meleeCollider.size / 2);
+            // set reseting boolean so that player must wait before swinging or shooting again
+            IsReseting = true;
 
-            foreach(Collider test in targets)
+            if (!IsGun)
             {
-                GameObject testObject = test.gameObject;
-                HealthComponent healthComp = testObject.GetComponent<HealthComponent>();
+                Collider[] targets = Physics.OverlapBox(meleeCollider.transform.position, meleeCollider.size / 2);
 
-                if (healthComp)
+                foreach (Collider test in targets)
                 {
-                    Debug.Log("healthComp found");
-                    healthComp.HandleHit(IsBlunt);
-                }
-                else
-                {
-                    Debug.Log("healthComp not found");
+                    GameObject testObject = test.gameObject;
+                    HealthComponent healthComp = testObject.GetComponent<HealthComponent>();
+
+                    if (healthComp)
+                    {
+                        Debug.Log("healthComp found");
+                        healthComp.HandleHit(IsBlunt);
+                    }
+                    else
+                    {
+                        Debug.Log("healthComp not found");
+                    }
                 }
             }
-        }
+
+            Invoke("UseLock", useResetTime);
+        }       
+    }
+
+    protected void UseLock()
+    {
+        IsReseting = false;
     }
 
     public virtual void Throw()
@@ -55,11 +73,16 @@ public class WeaponClass : MonoBehaviour
             Vector3 LaunchDir = gameObject.transform.parent.forward;
             LaunchDir.Normalize();
 
+            animator.SetBool(animBoolName, false);
+            animator = null;            
+
             // detach self from parent object
             gameObject.transform.parent = null;
 
+            weaponSprite.enabled = true;
+
             // make this object use physics and throw
-            if(rb)
+            if (rb)
             {
                 rb.isKinematic = false;
                 rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
@@ -71,12 +94,15 @@ public class WeaponClass : MonoBehaviour
         }
     }
 
-    public void PickedUp()
+    public virtual void PickedUp()
     {
         // called when picking up object to reset it to kinematic
         if(rb)
         {
             rb.isKinematic = true;
+            weaponSprite.enabled = false;
+            animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
+            animator.SetBool(animBoolName, true);
         }
         else
         {

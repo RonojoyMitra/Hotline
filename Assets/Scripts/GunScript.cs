@@ -18,6 +18,8 @@ public class GunScript : WeaponClass
 
     public override void Use() 
     {
+        
+
         if(ammoCount > 0)
         {
             // call base method for animation calls
@@ -33,5 +35,10 @@ public class GunScript : WeaponClass
 
             ammoCount--;
         }      
+    }
+
+    public override void PickedUp()
+    {
+        base.PickedUp();       
     }
 }
