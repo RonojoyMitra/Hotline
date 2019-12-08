@@ -55,9 +55,12 @@ public class PointManager : MonoBehaviour
 
         Destroy(floatingCanvas, 1.25f);
 
-        totalScore += EnemyPointsValue;
-        totalScoreText.text = totalScore.ToString() + "PTS";
-    }
+        if (totalScoreText !=null)
+        {
+            totalScore += EnemyPointsValue;
+            totalScoreText.text = totalScore.ToString() + "PTS";
+        }
+        }
 
     public void AddComboCount()
     {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406574839627603743}
   - component: {fileID: 1406574839627603742}
+  - component: {fileID: 688366591}
   m_Layer: 0
   m_Name: enemywalkcycle_0
   m_TagString: Untagged
@@ -81,6 +82,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &688366591
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406574839627603712}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a2087aa3bda4e4a4c9582e7dbf2a1e25, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1406574839692279045
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +119,7 @@ GameObject:
   - component: {fileID: 8034640590029827234}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,12 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0baaffad6e28ae4fb2ab7fe464484bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PatrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  PatrolPoints: []
+  myAgent: {fileID: 0}
   destPoint: 0
   enemySpeed: 5
   enemyChaseSpeed: 8
@@ -250,3 +266,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cf3d816fa0c7a4d9d3939c58dd2836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 688366591}
+  IsDead: 0

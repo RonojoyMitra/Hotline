@@ -8,6 +8,8 @@ public class GunScript : WeaponClass
     [SerializeField] int magSize = 25;
     [SerializeField] int ammoCount;
     [SerializeField] Transform muzzle;
+    public AudioSource thisaudioscource;
+    public AudioClip gunshot;
 
     protected override void Start()
     {
@@ -22,7 +24,7 @@ public class GunScript : WeaponClass
         {
             // call base method for animation calls
             base.Use();
-
+            thisaudioscource.PlayOneShot(gunshot);
             // instantiate a bullet prefab and set it's orientation to match the muzzle
             GameObject projectile = Instantiate(bullet);
             projectile.transform.position = muzzle.position;

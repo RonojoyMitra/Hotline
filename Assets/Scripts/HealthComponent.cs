@@ -45,6 +45,7 @@ public class HealthComponent : MonoBehaviour
                 {
                     GetComponent<EnemyMovementScript>().myAgent.isStopped = true;
                     GetComponent<Rigidbody>().isKinematic = true;
+                    print("YOU ARE DONE, HARVEY");
                     
                     // TODO set object rotation to face source of hit
 
