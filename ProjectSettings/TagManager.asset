@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PointManager
   - enemy
+  - PlayerAnimator
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,15 @@ public class HealthComponent : MonoBehaviour
     private void Start()
     {
         PM = GameObject.FindGameObjectWithTag("PointManager").GetComponent<PointManager>();
+
+        if(PM)
+        {
+            Debug.Log("Point manager found");
+        }
+        else
+        {
+            Debug.Log("Point manager was NOT found");
+        }
     }
 
     public void HandleHit(bool IsBluntHit)
@@ -37,13 +46,30 @@ public class HealthComponent : MonoBehaviour
                     // disable the healthcomp when dead
                     IsDead = true;
                 }
+                else
+                {
+                    // if object is the player then handle death animation and set IsDead to true
+                    if (animator)
+                    {
+                        Debug.Log("Animator found");
+
+                        // play death animation
+                        animator.SetTrigger("Death");
+                    }
+                    else
+                    {
+                        Debug.Log("Animator not found");
+                    }
+
+                    // disable the healthcomp when dead
+                    IsDead = true;
+                }
 
                 // TODO disable gameobject instead of destroying
-
-                // Destroy(this.gameObject);
                 if (this.gameObject.CompareTag("enemy"))
                 {
                     GetComponent<EnemyMovementScript>().myAgent.isStopped = true;
+                    //GetComponent<EnemyMovementScript>().DropWeapon();
                     GetComponent<Rigidbody>().isKinematic = true;
                     print("YOU ARE DONE, HARVEY");
                     
@@ -53,14 +79,14 @@ public class HealthComponent : MonoBehaviour
                     if (animator)
                     {
                         Debug.Log("Animator found");
+
+                        // play death animation
+                        animator.SetTrigger("Death");
                     }
                     else
                     {
                         Debug.Log("Animator not found");
-                    }
-
-                    // play blood FX
-                    animator.SetTrigger("Death");
+                    }                   
                 }
             }
         }          

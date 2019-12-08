@@ -4,37 +4,63 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //TODO add Animator variable
     [SerializeField] WeaponClass weapon;
     [SerializeField] BoxCollider interactCollider;
     [SerializeField] Transform weaponTransform;
+    [SerializeField] Animator bodyAnimator;
+    [SerializeField] Animator feetAnimator;
+    [SerializeField] float enemyDetectionDistance = 40.0f;
 
-    private Rigidbody rb;
+    HealthComponent healthComp;
+    Rigidbody rb;
     public float MoveSpeed = 5;
+
+    bool SetWalk = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        if(weapon)
-        {
-            weapon.gameObject.transform.parent = this.gameObject.transform;
-        }
+        healthComp = GetComponent<HealthComponent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        UseWeapon();
-        ThrowPickupWeapon();  
+        // if not dead allow input
+        if(!healthComp.IsDead)
+        {
+            Movement();
+            UseWeapon();
+            ThrowPickupWeapon();
+        }       
     }
 
     void Movement()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+
+        // handle the animation for walking
+        if(x != 0 || z != 0)
+        {
+            if(!SetWalk)
+            {
+                bodyAnimator.SetBool("IsWalking", true);
+                feetAnimator.SetBool("IsWalking", true);
+                //Debug.Log("Set Walking to True");
+                SetWalk = true;
+            }
+            
+        }
+        else if(x == 0 && z == 0)
+        {
+            bodyAnimator.SetBool("IsWalking", false);
+            feetAnimator.SetBool("IsWalking", false);
+            //Debug.Log("Set Walking to false");
+            SetWalk = false;
+        }
+
         Vector3 dir = new Vector3(x, 0, z);
         transform.Translate(new Vector3(dir.x * MoveSpeed * Time.deltaTime,0, dir.z * MoveSpeed * Time.deltaTime), Space.World);
     }
@@ -44,10 +70,21 @@ public class PlayerMovement : MonoBehaviour
         // left click to use weapon
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            // TODO call animation
             // check if we have a weapon assigned to var
             if (weapon)
             {
+                if(weapon.IsGun)
+                {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+                    foreach(GameObject test in enemies)
+                    {
+                        if(Vector3.Distance(test.transform.position, this.transform.position) <= enemyDetectionDistance)
+                        {
+                            test.GetComponent<EnemyMovementScript>().heardPlayer = true;
+                        }
+                    }
+                }
+
                 weapon.Use();
             }
         }
@@ -61,9 +98,9 @@ public class PlayerMovement : MonoBehaviour
             // check if we have a weapon assigned to var
             if (weapon)
             {
-                // Change player sprite
-                // Instantiate separate weapon Prefab
                 weapon.Throw();
+
+                // unassign weapon variable
                 weapon = null;
                 Invoke("PickUp", 0.1f);
             }
@@ -85,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 WeaponClass newWeapon = pickupItem.GetComponent<WeaponClass>();
                 if (newWeapon)
                 {
+                    // assign the new weapon to weapon variable and do a bunch of stuff to make position right
                     weapon = newWeapon;
                     weapon.gameObject.transform.position = weaponTransform.position;
                     weapon.gameObject.transform.rotation = weaponTransform.rotation;

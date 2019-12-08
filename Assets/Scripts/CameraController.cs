@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float CameraRadius = 5.0f;
     [SerializeField] float AimingRadius = 10.0f;
     [SerializeField] float CameraHeight = 27.0f;
+    [SerializeField] HealthComponent playerHealthComp;
 
     Vector3 MousePos;
     Vector3 DirectionVector;
@@ -22,24 +23,27 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        MousePos.y = Target.position.y;
-
-        DirectionVector = MousePos - Target.position;
-        DirectionVector.Normalize();
-
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(!playerHealthComp.IsDead)
         {
-            CamPos = Player.position + (DirectionVector * AimingRadius);
-        }
-        else
-        {
-            CamPos = Player.position + (DirectionVector * CameraRadius);
-        }
+            MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            MousePos.y = Target.position.y;
 
-        CamPos.y = CameraHeight;    
+            DirectionVector = MousePos - Target.position;
+            DirectionVector.Normalize();
 
-        Player.rotation = Quaternion.LookRotation(DirectionVector);
-        Target.position = Vector3.Lerp(Target.position, CamPos, CameraLagSpeed * Time.deltaTime);       
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CamPos = Player.position + (DirectionVector * AimingRadius);
+            }
+            else
+            {
+                CamPos = Player.position + (DirectionVector * CameraRadius);
+            }
+
+            CamPos.y = CameraHeight;
+
+            Player.rotation = Quaternion.LookRotation(DirectionVector);
+            Target.position = Vector3.Lerp(Target.position, CamPos, CameraLagSpeed * Time.deltaTime);
+        }            
     }   
 }

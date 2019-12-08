@@ -14,19 +14,22 @@ public class Bullets : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        GameObject testObject = collision.gameObject;
-        HealthComponent healthComp = testObject.GetComponent<HealthComponent>();
-
-        if (healthComp)
+        if(collision.gameObject.name != "Bullet")
         {
-            Debug.Log("healthComp found");
-            healthComp.HandleHit(false);
-        }
-        else
-        {
-            Debug.Log("healtComp not found");
-        }
+            GameObject testObject = collision.gameObject;
+            HealthComponent healthComp = testObject.GetComponent<HealthComponent>();
 
-        Destroy(this.gameObject);
+            if (healthComp)
+            {
+                Debug.Log("healthComp found");
+                healthComp.HandleHit(false);
+            }
+            else
+            {
+                Debug.Log("healtComp not found");
+            }
+
+            Destroy(this.gameObject);
+        }        
     }
 }

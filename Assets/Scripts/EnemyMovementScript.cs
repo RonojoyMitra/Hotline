@@ -5,12 +5,19 @@ using UnityEngine.AI;
 
 public class EnemyMovementScript : MonoBehaviour
 {
+    [SerializeField] GameObject weaponPrefab;
+    WeaponClass enemyWeapon;
+
+    [SerializeField] Transform weaponTransform;
+    [SerializeField] float meleeDistance;
+
     Rigidbody rb; 
     GameObject Player;
     Vector2 lastPlayerPosition;
     public Transform[] PatrolPoints;
     public NavMeshAgent myAgent;
 
+    public bool heardPlayer = false;
     bool reachedPoint = false;
     bool IsPatrolling = true;
     bool canSeePlayer = false;
@@ -26,10 +33,31 @@ public class EnemyMovementScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         myAgent = GetComponent<NavMeshAgent>();
         healthComp = GetComponent<HealthComponent>();
+        Player = GameObject.FindGameObjectWithTag("Player");
 
         if(healthComp)
         {
-            Debug.Log("HealthComp found on enemy");
+            Debug.Log("HealthComp found on: " + this.gameObject.name);
+        }
+        else
+        {
+            Debug.Log("healthComp NOT found on: " + this.gameObject.name);
+        }
+
+        GameObject tempWeapon = Instantiate(weaponPrefab);
+
+        enemyWeapon = tempWeapon.GetComponent<WeaponClass>();
+
+        if(enemyWeapon)
+        {
+            enemyWeapon.gameObject.transform.position = weaponTransform.position;
+            enemyWeapon.gameObject.transform.rotation = weaponTransform.rotation;
+            enemyWeapon.gameObject.transform.SetParent(weaponTransform);
+            enemyWeapon.PickedUp();
+        }
+        else
+        {
+            Debug.Log(this.gameObject.name + " does NOT have a weapon");
         }
     }
 
@@ -45,28 +73,27 @@ public class EnemyMovementScript : MonoBehaviour
                 PatrolPath();
             }
 
-            if (canSeePlayer)
+            if (canSeePlayer || heardPlayer)
             {
                 MoveTowardsPlayer();
+
+                if(enemyWeapon)
+                {
+                    if (enemyWeapon.IsGun)
+                    {
+                        enemyWeapon.Use();
+                    }
+                    else if (Vector3.Distance(transform.position, Player.transform.position) <= meleeDistance)
+                    {
+                        enemyWeapon.Use();
+                    }
+                }
             }
         }         
     }
 
     void PatrolPath()
     {
-        //transform.LookAt(PatrolPoints[destPoint].position);
-        //transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[destPoint].position, enemySpeed * Time.deltaTime);
-        // Debug.Log(destPoint);
-
-        //if (Vector3.Distance(transform.position, PatrolPoints[destPoint].position) == 0)
-        //{
-        //    Debug.Log("reached point");
-        //    reachedPoint = true;
-        //    destPoint = (destPoint + 1) % PatrolPoints.Length;
-        //}
-        //destPoint = destPoint + 1;
-        
-
         //patrols the points set in PatrolPoints
         if (myAgent.remainingDistance <= .2f)
         {
@@ -80,7 +107,7 @@ public class EnemyMovementScript : MonoBehaviour
         {
             //destPoint = (destPoint + 1) % PatrolPoints.Length;
             //destPoint = destPoint + 1;
-            Debug.Log("incrementpoint");
+            Debug.Log("increment point");
             destPoint = (destPoint + 1);
             reachedPoint = false;
         }
@@ -93,7 +120,7 @@ public class EnemyMovementScript : MonoBehaviour
         myAgent.destination = PatrolPoints[destPoint].position;
     }
 
-    void MoveTowardsPlayer()
+    public void MoveTowardsPlayer()
     {
         //Moves towards player
         IsPatrolling = false;
@@ -105,21 +132,6 @@ public class EnemyMovementScript : MonoBehaviour
 
     void LookForPlayer()
     {
-        //var hit = Physics.Raycast(transform.position, Vector2.left, 5f);
-        //Debug.DrawRay(transform.position, Vector2.left, Color.cyan);
-        //if (hit && hit.transform.name == "Player")
-        //{
-        //    lastPlayerPosition = Player.transform.position;
-        //    canSeePlayer = true;
-        //    Debug.Log(canSeePlayer);
-        //}
-        //if (hit && hit.transform.name != "Player")
-        //{
-        //    canSeePlayer = false;
-        //    Debug.Log(canSeePlayer);
-        //}
-
-
         //casts a ray that looks for the player
         Ray lookRay = new Ray(transform.position, transform.forward);
         RaycastHit hit;
@@ -132,9 +144,14 @@ public class EnemyMovementScript : MonoBehaviour
             if (hit.transform.tag == "Player")
             {
                 canSeePlayer = true;
-                Debug.Log("canseeplayer");
+                //Debug.Log("canseeplayer");
                 Player = hit.collider.gameObject;
             }
         }
+    }
+
+    public void DropWeapon()
+    {
+        enemyWeapon.Throw();
     }
 }
