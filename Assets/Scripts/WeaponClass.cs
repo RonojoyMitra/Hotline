@@ -7,7 +7,7 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] protected bool IsBlunt;   
     [SerializeField] protected float useResetTime;
     [SerializeField] protected float throwForce;   
-    [SerializeField] protected string animTriggerName;
+    [SerializeField] protected string attackBoolName;
     [SerializeField] protected string animBoolName;
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Collider pickUpCollider;
@@ -17,7 +17,7 @@ public class WeaponClass : MonoBehaviour
     protected bool IsReseting = false;
 
     protected Animator animator;
-    Rigidbody rb;
+    [SerializeField] Rigidbody rb;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -30,7 +30,7 @@ public class WeaponClass : MonoBehaviour
         if(!IsReseting)
         {
             //TODO add animation call here
-            //animator.SetTrigger(animTriggerName);
+            animator.SetBool(attackBoolName, true);
 
             // set reseting boolean so that player must wait before swinging or shooting again
             IsReseting = true;
@@ -63,6 +63,7 @@ public class WeaponClass : MonoBehaviour
     protected void UseLock()
     {
         IsReseting = false;
+        animator.SetBool(attackBoolName, false);
     }
 
     public virtual void Throw()
@@ -109,6 +110,20 @@ public class WeaponClass : MonoBehaviour
             {
                 animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
                 animator.SetBool(animBoolName, true);
+            }
+            else if(transform.parent.parent.tag == "enemy")
+            {
+                animator = gameObject.GetComponentInChildren<Animator>();
+                animator.SetBool(animBoolName, true);
+
+                if(animator)
+                {
+                    Debug.Log("Found Enemy Animator");
+                }
+                else
+                {
+                    Debug.Log("NO Enemy Animator");
+                }             
             }
         }
         else

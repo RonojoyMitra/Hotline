@@ -1,22 +1,13 @@
 fileFormatVersion: 2
-guid: 6de8d4c1e7d94ea4ab727669f122359a
+guid: cd0c8a29b7b9cbf448a77394c77cb327
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1180806704304647944
-    second: enemyKnifeStab_0
+      213: 4954801463314221353
+    second: enemySmallGun_0
   - first:
-      213: 2998599640789788628
-    second: enemyKnifeStab_1
-  - first:
-      213: 967720592093305658
-    second: enemyKnifeStab_2
-  - first:
-      213: 186205391143830990
-    second: enemyKnifeStab_3
-  - first:
-      213: -6798951251932708392
-    second: enemyKnifeStab_4
+      213: 7749715358865400735
+    second: enemySmallGun_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -149,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemyKnifeStab_0
+      name: enemySmallGun_0
       rect:
         serializedVersion: 2
         x: 1
         y: 1
-        width: 13
-        height: 24
+        width: 32
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 812d46c8b7bae6543856fe5c9ef78dc5
-      internalID: -1180806704304647944
+      spriteID: 68d757c2da8a4104dafa3d1a9efe23ff
+      internalID: 4954801463314221353
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyKnifeStab_1
+      name: enemySmallGun_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1
-        width: 24
-        height: 25
+        x: 35
+        y: 5
+        width: 42
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,71 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17674343670db604e899163a6748937d
-      internalID: 2998599640789788628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemyKnifeStab_2
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 1
-        width: 25
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2997a438588e1db4c950af87b057043c
-      internalID: 967720592093305658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemyKnifeStab_3
-      rect:
-        serializedVersion: 2
-        x: 68
-        y: 1
-        width: 24
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89bbc7cb60d3f4d4aab0ccee0032ea2e
-      internalID: 186205391143830990
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemyKnifeStab_4
-      rect:
-        serializedVersion: 2
-        x: 93
-        y: 1
-        width: 13
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12e10c9306c377742b56f2f4218e268d
-      internalID: -6798951251932708392
+      spriteID: abec2860b2fe9a344b013845da3e3b42
+      internalID: 7749715358865400735
       vertices: []
       indices: 
       edges: []
@@ -256,7 +184,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 929e5b5297c137241a6d71a80665357d
+    spriteID: a3e5dec3d23567c4db556ecafeb0aaf8
     internalID: 0
     vertices: []
     indices: 

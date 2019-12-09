@@ -107,12 +107,13 @@ MonoBehaviour:
   IsBlunt: 0
   useResetTime: 0
   throwForce: 50
-  animTriggerName: SwingBat
+  attackBoolName: SwingBat
   animBoolName: HasBat
   weaponSprite: {fileID: 4656809646872812189}
   pickUpCollider: {fileID: 4656809645203879679}
   meleeCollider: {fileID: 4656809645161698054}
   IsGun: 0
+  rb: {fileID: 4656809645203879668}
 --- !u!54 &4656809645203879668
 Rigidbody:
   m_ObjectHideFlags: 0

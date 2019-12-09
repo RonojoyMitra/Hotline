@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916310687265943899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.32, y: 1.36, z: 0.253}
+  m_LocalPosition: {x: 0.81, y: 1.15, z: -0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 916310687561289004}
@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBlunt: 0
-  useResetTime: 1
+  useResetTime: 0.5
   throwForce: 100
-  animTriggerName: FireShotgun
+  attackBoolName: FireShotgun
   animBoolName: HasShotgun
   weaponSprite: {fileID: 2132606202}
   pickUpCollider: {fileID: 916310687561289007}

@@ -1,22 +1,16 @@
 fileFormatVersion: 2
-guid: 6de8d4c1e7d94ea4ab727669f122359a
+guid: ad688206ad0297b4fa589b37e98378ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1180806704304647944
-    second: enemyKnifeStab_0
+      213: 8651585817623419034
+    second: enemyRifle_0
   - first:
-      213: 2998599640789788628
-    second: enemyKnifeStab_1
+      213: 4009057109040237973
+    second: enemyRifle_1
   - first:
-      213: 967720592093305658
-    second: enemyKnifeStab_2
-  - first:
-      213: 186205391143830990
-    second: enemyKnifeStab_3
-  - first:
-      213: -6798951251932708392
-    second: enemyKnifeStab_4
+      213: -5821838187883103914
+    second: enemyRifle_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -149,13 +143,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemyKnifeStab_0
+      name: enemyRifle_0
       rect:
         serializedVersion: 2
         x: 1
-        y: 1
-        width: 13
-        height: 24
+        y: 3
+        width: 32
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +157,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 812d46c8b7bae6543856fe5c9ef78dc5
-      internalID: -1180806704304647944
+      spriteID: 143caeed63372184b9b687614f4210a0
+      internalID: 8651585817623419034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyKnifeStab_1
+      name: enemyRifle_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1
-        width: 24
-        height: 25
+        x: 36
+        y: 4
+        width: 34
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,20 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17674343670db604e899163a6748937d
-      internalID: 2998599640789788628
+      spriteID: 3f8fe052be17c1444893ceae93e7ed96
+      internalID: 4009057109040237973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemyKnifeStab_2
+      name: enemyRifle_2
       rect:
         serializedVersion: 2
-        x: 41
-        y: 1
-        width: 25
-        height: 24
+        x: 73
+        y: 5
+        width: 32
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,50 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2997a438588e1db4c950af87b057043c
-      internalID: 967720592093305658
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemyKnifeStab_3
-      rect:
-        serializedVersion: 2
-        x: 68
-        y: 1
-        width: 24
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89bbc7cb60d3f4d4aab0ccee0032ea2e
-      internalID: 186205391143830990
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemyKnifeStab_4
-      rect:
-        serializedVersion: 2
-        x: 93
-        y: 1
-        width: 13
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12e10c9306c377742b56f2f4218e268d
-      internalID: -6798951251932708392
+      spriteID: 5dd27353061fe464d8d8eca93e1c003f
+      internalID: -5821838187883103914
       vertices: []
       indices: 
       edges: []
@@ -256,7 +208,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 929e5b5297c137241a6d71a80665357d
+    spriteID: eb9edcd99e391b84a955a834c1d58d41
     internalID: 0
     vertices: []
     indices: 

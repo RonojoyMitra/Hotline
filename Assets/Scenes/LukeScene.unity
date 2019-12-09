@@ -1762,6 +1762,7 @@ MonoBehaviour:
   weaponTransform: {fileID: 1716969260}
   bodyAnimator: {fileID: 357794471}
   feetAnimator: {fileID: 249308783}
+  enemyDetectionDistance: 40
   MoveSpeed: 10
 --- !u!114 &758920568
 MonoBehaviour:
@@ -5827,10 +5828,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Club
       objectReference: {fileID: 0}
+    - target: {fileID: 4656809645203879667, guid: 75ad90c1ef97ac74a9c9c7e241644682,
+        type: 3}
+      propertyPath: useResetTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4656809645203879666, guid: 75ad90c1ef97ac74a9c9c7e241644682,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.65
+      value: 1.99
       objectReference: {fileID: 0}
     - target: {fileID: 4656809645203879666, guid: 75ad90c1ef97ac74a9c9c7e241644682,
         type: 3}
@@ -5840,7 +5846,7 @@ PrefabInstance:
     - target: {fileID: 4656809645203879666, guid: 75ad90c1ef97ac74a9c9c7e241644682,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.51
+      value: -4.83
       objectReference: {fileID: 0}
     - target: {fileID: 4656809645203879666, guid: 75ad90c1ef97ac74a9c9c7e241644682,
         type: 3}
