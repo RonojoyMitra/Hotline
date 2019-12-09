@@ -4,40 +4,116 @@ using UnityEngine;
 
 public class WeaponClass : MonoBehaviour
 {
-    [SerializeField] bool bIsBlunt;
-    [SerializeField] float useResetTime;
-    [SerializeField] float throwForce;
-    [SerializeField] Sprite weaponSprite;
+    [SerializeField] protected bool IsBlunt;   
+    [SerializeField] protected float useResetTime;
+    [SerializeField] protected float throwForce;   
+    [SerializeField] protected string animTriggerName;
+    [SerializeField] protected string animBoolName;
+    [SerializeField] protected SpriteRenderer weaponSprite;
+    [SerializeField] protected Collider pickUpCollider;
+    [SerializeField] protected BoxCollider meleeCollider;
 
+    public bool IsGun;    
+    protected bool IsReseting = false;
+
+    protected Animator animator;
     Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
     public virtual void Use()
     {
+        if(!IsReseting)
+        {
+            //TODO add animation call here
+            //animator.SetTrigger(animTriggerName);
 
+            // set reseting boolean so that player must wait before swinging or shooting again
+            IsReseting = true;
+
+            if (!IsGun)
+            {
+                Collider[] targets = Physics.OverlapBox(meleeCollider.transform.position, meleeCollider.size / 2);
+
+                foreach (Collider test in targets)
+                {
+                    GameObject testObject = test.gameObject;
+                    HealthComponent healthComp = testObject.GetComponent<HealthComponent>();
+
+                    if (healthComp)
+                    {
+                        Debug.Log("healthComp found");
+                        healthComp.HandleHit(IsBlunt);
+                    }
+                    else
+                    {
+                        Debug.Log("healthComp not found");
+                    }
+                }
+            }
+
+            Invoke("UseLock", useResetTime);
+        }       
+    }
+
+    protected void UseLock()
+    {
+        IsReseting = false;
     }
 
     public virtual void Throw()
     {
+        //TODO
         if(gameObject.transform.parent != null)
         {
+            // get forward direction from parent object
             Vector3 LaunchDir = gameObject.transform.parent.forward;
             LaunchDir.Normalize();
 
+            animator.SetBool(animBoolName, false);
+            animator = null;            
+
+            // detach self from parent object
             gameObject.transform.parent = null;
 
-            rb.isKinematic = false;
-            rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
+            weaponSprite.enabled = true;
+            pickUpCollider.enabled = true;
+
+            // make this object use physics and throw
+            if (rb)
+            {
+                rb.isKinematic = false;
+                rb.AddForce(LaunchDir * throwForce, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.Log("Rigidbody not found");
+            }         
         }
     }
 
-    public void PickedUp()
+    public virtual void PickedUp()
     {
-        rb.isKinematic = true;
+        // called when picking up object to reset it to kinematic
+        if(rb)
+        {
+            rb.isKinematic = true;
+            pickUpCollider.enabled = false;
+            weaponSprite.enabled = false;
+
+            if (transform.parent.parent.tag == "Player")
+            {
+                animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
+                animator.SetBool(animBoolName, true);
+            }
+        }
+        else
+        {
+            Debug.Log("Rigidbody not found");
+        }
     }
 }
