@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4656809645203879667}
   - component: {fileID: 4656809645203879668}
   m_Layer: 0
-  m_Name: Club
+  m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,10 +60,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBlunt: 0
-  useResetTime: 0
+  useResetTime: 0.3
   throwForce: 50
-  attackBoolName: SwingBat
-  animBoolName: HasBat
+  attackBoolName: SwingKnife
+  animBoolName: HasKnife
   weaponSprite: {fileID: 4656809646872812189}
   pickUpCollider: {fileID: 4656809645203879679}
   rb: {fileID: 4656809645203879668}
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5214576322002826026, guid: 4a0b43c757560314ba105f612d8426ea,
+  m_Sprite: {fileID: 1692280188772239226, guid: 4a0b43c757560314ba105f612d8426ea,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

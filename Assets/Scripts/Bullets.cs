@@ -14,7 +14,7 @@ public class Bullets : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name != "Bullet")
+        if(collision.gameObject.tag != "bullet")
         {
             GameObject testObject = collision.gameObject;
             HealthComponent healthComp = testObject.GetComponent<HealthComponent>();

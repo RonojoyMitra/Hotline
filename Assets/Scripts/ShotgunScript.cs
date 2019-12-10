@@ -28,12 +28,16 @@ public class ShotgunScript : WeaponClass
                 // instantiate a bullet prefab and set it's orientation to match the muzzle
                 for(int i = 0; i < 6; i++)
                 {
+                    // Debug.Break();
+
                     GameObject projectile = Instantiate(bullet);
                     projectile.transform.position = muzzle.position;
 
                     Quaternion projectileRot = muzzle.rotation;
-                    projectile.transform.rotation = Quaternion.Euler(projectileRot.eulerAngles.x + -90, projectileRot.eulerAngles.y,
-                        projectileRot.eulerAngles.z + +Random.Range(-20.0f, 20.0f));                  
+                    projectile.transform.rotation = Quaternion.Euler(projectileRot.eulerAngles.x + -90, projectileRot.eulerAngles.y + Random.Range(-20.0f, 20.0f),
+                        projectileRot.eulerAngles.z);
+
+                    Debug.Log("Shotgun Bullet");
                 }
 
                 ammoCount--;

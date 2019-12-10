@@ -54,6 +54,7 @@ public class EnemyMovementScript : MonoBehaviour
             enemyWeapon.gameObject.transform.rotation = weaponTransform.rotation;
             enemyWeapon.gameObject.transform.SetParent(weaponTransform);
             enemyWeapon.PickedUp();
+            Debug.Log("Called PickedUp");
         }
         else
         {

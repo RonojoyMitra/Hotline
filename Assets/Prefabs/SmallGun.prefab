@@ -190,12 +190,13 @@ MonoBehaviour:
   IsBlunt: 0
   useResetTime: 0.25
   throwForce: 50
-  animTriggerName: FireSmallGun
+  attackBoolName: FireSmallGun
   animBoolName: HasSmallGun
   weaponSprite: {fileID: 2132606202}
   pickUpCollider: {fileID: 916310687561289007}
   meleeCollider: {fileID: 0}
   IsGun: 1
+  rb: {fileID: 916310687561289000}
   bullet: {fileID: 6283538037800206884, guid: f006d484a46a78140b1fcf3a72676684, type: 3}
   magSize: 25
   ammoCount: 0

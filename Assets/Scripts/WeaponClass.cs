@@ -7,17 +7,17 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] protected bool IsBlunt;   
     [SerializeField] protected float useResetTime;
     [SerializeField] protected float throwForce;   
-    [SerializeField] protected string animTriggerName;
+    [SerializeField] protected string attackBoolName;
     [SerializeField] protected string animBoolName;
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Collider pickUpCollider;
-    [SerializeField] protected BoxCollider meleeCollider;
-
+    [SerializeField] Rigidbody rb;
+  
     public bool IsGun;    
     protected bool IsReseting = false;
 
     protected Animator animator;
-    Rigidbody rb;
+    protected BoxCollider meleeCollider;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -30,7 +30,7 @@ public class WeaponClass : MonoBehaviour
         if(!IsReseting)
         {
             //TODO add animation call here
-            //animator.SetTrigger(animTriggerName);
+            animator.SetBool(attackBoolName, true);
 
             // set reseting boolean so that player must wait before swinging or shooting again
             IsReseting = true;
@@ -63,6 +63,7 @@ public class WeaponClass : MonoBehaviour
     protected void UseLock()
     {
         IsReseting = false;
+        animator.SetBool(attackBoolName, false);
     }
 
     public virtual void Throw()
@@ -109,6 +110,42 @@ public class WeaponClass : MonoBehaviour
             {
                 animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
                 animator.SetBool(animBoolName, true);
+
+                meleeCollider = transform.parent.parent.GetChild(4).GetComponent<BoxCollider>();
+
+                if(meleeCollider)
+                {
+                    Debug.Log("Found melee collider");
+                }
+                else
+                {
+                    Debug.Log("Melee collider not found, check GetChild index line 114");
+                }
+            }
+            else if(transform.parent.parent.tag == "enemy")
+            {
+                animator = transform.parent.parent.GetComponentInChildren<Animator>();
+
+                if (animator)
+                {
+                    animator.SetBool(animBoolName, true);
+                    Debug.Log("Found Enemy Animator");
+                }
+                else
+                {
+                    Debug.Log("NO Enemy Animator");
+                }
+
+                meleeCollider = transform.parent.parent.GetChild(2).GetComponent<BoxCollider>();
+
+                if (meleeCollider)
+                {
+                    Debug.Log(gameObject.name + "Found melee collider");
+                }
+                else
+                {
+                    Debug.Log(gameObject.name + "Melee collider not found, check GetChild index line 114");
+                }
             }
         }
         else
