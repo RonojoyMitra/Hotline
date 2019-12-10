@@ -11,13 +11,13 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] protected string animBoolName;
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Collider pickUpCollider;
-    [SerializeField] protected BoxCollider meleeCollider;
-
+    [SerializeField] Rigidbody rb;
+  
     public bool IsGun;    
     protected bool IsReseting = false;
 
     protected Animator animator;
-    [SerializeField] Rigidbody rb;
+    protected BoxCollider meleeCollider;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -110,20 +110,42 @@ public class WeaponClass : MonoBehaviour
             {
                 animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
                 animator.SetBool(animBoolName, true);
+
+                meleeCollider = transform.parent.parent.GetChild(4).GetComponent<BoxCollider>();
+
+                if(meleeCollider)
+                {
+                    Debug.Log("Found melee collider");
+                }
+                else
+                {
+                    Debug.Log("Melee collider not found, check GetChild index line 114");
+                }
             }
             else if(transform.parent.parent.tag == "enemy")
             {
-                animator = gameObject.GetComponentInChildren<Animator>();
-                animator.SetBool(animBoolName, true);
+                animator = transform.parent.parent.GetComponentInChildren<Animator>();
 
-                if(animator)
+                if (animator)
                 {
+                    animator.SetBool(animBoolName, true);
                     Debug.Log("Found Enemy Animator");
                 }
                 else
                 {
                     Debug.Log("NO Enemy Animator");
-                }             
+                }
+
+                meleeCollider = transform.parent.parent.GetChild(2).GetComponent<BoxCollider>();
+
+                if (meleeCollider)
+                {
+                    Debug.Log(gameObject.name + "Found melee collider");
+                }
+                else
+                {
+                    Debug.Log(gameObject.name + "Melee collider not found, check GetChild index line 114");
+                }
             }
         }
         else
