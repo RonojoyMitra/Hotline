@@ -933,6 +933,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Postprocessing
       objectReference: {fileID: 0}
+    - target: {fileID: 3721403800821928466, guid: 5aab6f6ccccce164a94e12a3fb0f12b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3721403800821928492, guid: 5aab6f6ccccce164a94e12a3fb0f12b8,
         type: 3}
       propertyPath: m_LocalPosition.x
