@@ -129,11 +129,11 @@ public class WeaponClass : MonoBehaviour
                 if (animator)
                 {
                     animator.SetBool(animBoolName, true);
-                    Debug.Log("Found Enemy Animator");
+                    // Debug.Log("Found Enemy Animator");
                 }
                 else
                 {
-                    Debug.Log("NO Enemy Animator");
+                    Debug.Log("NO Enemy Animator" + transform.parent.parent.name);
                 }
 
                 meleeCollider = transform.parent.parent.GetChild(2).GetComponent<BoxCollider>();
