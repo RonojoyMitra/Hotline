@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform weaponTransform;
     [SerializeField] Animator bodyAnimator;
     [SerializeField] Animator feetAnimator;
-    [SerializeField] float enemyDetectionDistance = 40.0f;
+    [SerializeField] float enemyDetectionDistance = 10.0f;
 
     HealthComponent healthComp;
     Rigidbody rb;
@@ -22,6 +22,11 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         healthComp = GetComponent<HealthComponent>();
+
+        weapon.gameObject.transform.position = weaponTransform.position;
+        weapon.gameObject.transform.rotation = weaponTransform.rotation;
+        weapon.gameObject.transform.SetParent(weaponTransform);
+        weapon.PickedUp();
     }
 
     // Update is called once per frame
@@ -51,7 +56,15 @@ public class PlayerMovement : MonoBehaviour
                 //Debug.Log("Set Walking to True");
                 SetWalk = true;
             }
-            
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+            foreach (GameObject test in enemies)
+            {
+                if (Vector3.Distance(test.transform.position, this.transform.position) <= (enemyDetectionDistance / 5))
+                {
+                    test.GetComponent<EnemyMovementScript>().heardPlayer = true;
+                }
+            }
         }
         else if(x == 0 && z == 0)
         {

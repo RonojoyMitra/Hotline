@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4656809645203879679}
   - component: {fileID: 4656809645203879667}
   - component: {fileID: 4656809645203879668}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Club
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBlunt: 0
-  useResetTime: 0
+  useResetTime: 0.4
   throwForce: 50
   attackBoolName: SwingBat
   animBoolName: HasBat
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4656809646872812188}
   - component: {fileID: 4656809646872812189}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: base_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

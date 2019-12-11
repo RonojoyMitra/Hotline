@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2132606201}
   - component: {fileID: 2132606202}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 916310687265943898}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916310687265943899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 1.15, z: -0.64}
+  m_LocalPosition: {x: 1.35, y: 0.11, z: -0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 916310687561289004}
@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 916310687561289007}
   - component: {fileID: 916310687561289000}
   - component: {fileID: 5128254031876316391}
-  m_Layer: 0
-  m_Name: Rifle
+  m_Layer: 2
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   animBoolName: HasShotgun
   weaponSprite: {fileID: 2132606202}
   pickUpCollider: {fileID: 916310687561289007}
-  meleeCollider: {fileID: 0}
+  rb: {fileID: 916310687561289000}
   IsGun: 1
   bullet: {fileID: 6283538037800206884, guid: f006d484a46a78140b1fcf3a72676684, type: 3}
   magSize: 6
