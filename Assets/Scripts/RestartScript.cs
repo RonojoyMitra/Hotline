@@ -29,7 +29,7 @@ public class RestartScript : MonoBehaviour
         {
             if(playerHealthComp.IsDead)
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(2);
             }
         }
     }
