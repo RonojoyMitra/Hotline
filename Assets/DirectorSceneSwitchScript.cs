@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class DirectorSceneSwitchScript : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class DirectorSceneSwitchScript : MonoBehaviour
     {
         if (director == aDirector)
             Debug.Log("PlayableDirector named " + aDirector.name + " is now stopped.");
+        SceneManager.LoadScene("Level1");
     }
 
     void OnDisable()

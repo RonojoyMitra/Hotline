@@ -12,6 +12,10 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Collider pickUpCollider;
     [SerializeField] Rigidbody rb;
+    public AudioSource audiosource;
+    public AudioClip sound1;
+    public AudioClip sound2;
+    public AudioClip sound3;
   
     public bool IsGun;    
     protected bool IsReseting = false;
@@ -48,10 +52,12 @@ public class WeaponClass : MonoBehaviour
                     {
                         Debug.Log("healthComp found");
                         healthComp.HandleHit(IsBlunt);
+                        audiosource.PlayOneShot(sound1);
                     }
                     else
                     {
                         Debug.Log("healthComp not found");
+                        audiosource.PlayOneShot(sound2);
                     }
                 }
             }
@@ -71,6 +77,7 @@ public class WeaponClass : MonoBehaviour
         //TODO
         if(gameObject.transform.parent != null)
         {
+            audiosource.PlayOneShot(sound3);
             // get forward direction from parent object
             Vector3 LaunchDir = gameObject.transform.parent.forward;
             LaunchDir.Normalize();

@@ -8,6 +8,9 @@ public class ShotgunScript : WeaponClass
     [SerializeField] int magSize = 25;
     [SerializeField] int ammoCount;
     [SerializeField] Transform muzzle;
+    public AudioSource audiosource;
+    public AudioClip gunsound2;
+    
 
     protected override void Start()
     {
@@ -32,7 +35,7 @@ public class ShotgunScript : WeaponClass
 
                     GameObject projectile = Instantiate(bullet);
                     projectile.transform.position = muzzle.position;
-
+                    
                     Quaternion projectileRot = muzzle.rotation;
                     projectile.transform.rotation = Quaternion.Euler(projectileRot.eulerAngles.x + -90, projectileRot.eulerAngles.y + Random.Range(-20.0f, 20.0f),
                         projectileRot.eulerAngles.z);
@@ -41,6 +44,7 @@ public class ShotgunScript : WeaponClass
                 }
 
                 ammoCount--;
+                audiosource.PlayOneShot(gunsound2);
             }
 
             Invoke("UseLock", useResetTime);

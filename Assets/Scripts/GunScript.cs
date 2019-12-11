@@ -8,6 +8,8 @@ public class GunScript : WeaponClass
     [SerializeField] int magSize = 25;
     [SerializeField] int ammoCount;
     [SerializeField] Transform muzzle;
+    public AudioSource audiosource;
+    public AudioClip gunsound;
 
     protected override void Start()
     {
@@ -28,7 +30,7 @@ public class GunScript : WeaponClass
                 // instantiate a bullet prefab and set it's orientation to match the muzzle
                 GameObject projectile = Instantiate(bullet);
                 projectile.transform.position = muzzle.position;
-            
+                audiosource.PlayOneShot(gunsound);
                 Quaternion projectileRot = muzzle.rotation;
                 projectile.transform.rotation = Quaternion.Euler(projectileRot.eulerAngles.x + -90, projectileRot.eulerAngles.y,
                     projectileRot.eulerAngles.z);
