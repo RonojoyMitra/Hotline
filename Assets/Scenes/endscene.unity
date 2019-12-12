@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -464,7 +464,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bb16b2bbf0c213142a8f5ce4d6b452fe, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.47
+  m_Volume: 0.78
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -795,8 +795,9 @@ MonoBehaviour:
     NAMES TO MAKE THIS LOOK SUBSTANTIAL\n\nDREW CAINES\nEURIS 'JONATHAN' ADINO\nZACHARY
     STEPHENS\nRAYMOND LOTHIAN\nSANTIAGO FERNANDEZ\nGABRIELLA DIAS\nMILES ROSENTHAL\nKATHERINE
     BLUM\nSAUL LEAL\nSAMMY CHUANG\nALEKAI McADAM\nMARK\nSAMORI JAALI JACKSON\nJAMES
-    PARK\nMICAYLA TORRES\nTHEO \nPHILIP PARK\n\n\n\n\nHONESTLY I'M WASTING SO MUCH
-    TIME ON THSI\n\nIT's 4:15 I'M just going to go sleep\n"
+    PARK\nMICAYLA TORRES\nTHEO \nPHILIP PARK\nMUKUNDA KAUSHIK\nMIHIR SUMANT\n\n\nSPECIAL
+    THANKS TO \nJUSTIN'S SOURIN\nAU BON PAIN\nGREG\nCAMEL CIGARETTES\nSTICKYS\n\nHONESTLY
+    I'M WASTING SO MUCH TIME ON THSI\n\nIT's 4:15 I'M just going to go sleep\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52a547f4c3b06ae4ab86c6d4cf191c87, type: 2}
   m_sharedMaterial: {fileID: -1416318130056432020, guid: 52a547f4c3b06ae4ab86c6d4cf191c87,
@@ -866,12 +867,12 @@ MonoBehaviour:
   m_margin: {x: -281.93646, y: 0, z: -161.11002, w: -36.192963}
   m_textInfo:
     textComponent: {fileID: 1964101816}
-    characterCount: 499
+    characterCount: 604
     spriteCount: 0
-    spaceCount: 95
-    wordCount: 81
+    spaceCount: 111
+    wordCount: 97
     linkCount: 0
-    lineCount: 42
+    lineCount: 49
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
