@@ -74,20 +74,26 @@ public class EnemyMovementScript : MonoBehaviour
                 PatrolPath();
             }
 
+            // move towards player and attack
             if (canSeePlayer || heardPlayer)
             {
                 MoveTowardsPlayer();
 
                 if(enemyWeapon)
                 {
-                    if (enemyWeapon.IsGun)
+                    // Check again if enemy has line of sight on player
+                    if(canSeePlayer)
                     {
-                        enemyWeapon.Use();
-                    }
-                    else if (Vector3.Distance(transform.position, Player.transform.position) <= meleeDistance)
-                    {
-                        enemyWeapon.Use();
-                    }
+                        if (enemyWeapon.IsGun)
+                        {
+                            enemyWeapon.Use();
+                        }
+                        else if (Vector3.Distance(transform.position, Player.transform.position) <= meleeDistance)
+                        {
+                            // if using a melee weapon wait until in proper distance to use
+                            enemyWeapon.Use();
+                        }
+                    }                 
                 }
             }
         }         
@@ -147,6 +153,10 @@ public class EnemyMovementScript : MonoBehaviour
                 canSeePlayer = true;
                 //Debug.Log("canseeplayer");
                 Player = hit.collider.gameObject;
+            }
+            else
+            {
+                canSeePlayer = false;
             }
         }
     }

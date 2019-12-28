@@ -8,7 +8,6 @@ public class ShotgunScript : WeaponClass
     [SerializeField] int magSize = 25;
     [SerializeField] int ammoCount;
     [SerializeField] Transform muzzle;
-    public AudioSource audiosource;
     public AudioClip gunsound2;
     
 
@@ -43,8 +42,8 @@ public class ShotgunScript : WeaponClass
                     Debug.Log("Shotgun Bullet");
                 }
 
-                ammoCount--;
                 audiosource.PlayOneShot(gunsound2);
+                ammoCount--;           
             }
 
             Invoke("UseLock", useResetTime);

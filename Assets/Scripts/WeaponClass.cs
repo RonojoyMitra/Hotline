@@ -12,7 +12,7 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] protected SpriteRenderer weaponSprite;
     [SerializeField] protected Collider pickUpCollider;
     [SerializeField] Rigidbody rb;
-    public AudioSource audiosource;
+    [SerializeField] protected AudioSource audiosource;
     public AudioClip sound1;
     public AudioClip sound2;
     public AudioClip sound3;
@@ -52,6 +52,7 @@ public class WeaponClass : MonoBehaviour
                     {
                         Debug.Log("healthComp found");
                         healthComp.HandleHit(IsBlunt);
+
                         audiosource.PlayOneShot(sound1);
                     }
                     else
@@ -115,28 +116,35 @@ public class WeaponClass : MonoBehaviour
 
             if (transform.parent.parent.tag == "Player")
             {
+                // get the player's Animator and set weapon hold animState
                 animator = GameObject.FindGameObjectWithTag("PlayerAnimator").GetComponent<Animator>();
-                animator.SetBool(animBoolName, true);
+                if (animator)
+                {
+                    animator.SetBool(animBoolName, true);
+                }
+                else
+                {
+                    Debug.Log("NO Enemy Animator" + transform.parent.parent.name);
+                }
 
+                // TODO clean up getting meleeCollider from player
                 meleeCollider = transform.parent.parent.GetChild(4).GetComponent<BoxCollider>();
-
                 if(meleeCollider)
                 {
                     Debug.Log("Found melee collider");
                 }
                 else
                 {
-                    Debug.Log("Melee collider not found, check GetChild index line 114");
+                    Debug.Log("Melee collider not found, check GetChild index line 123");
                 }
             }
             else if(transform.parent.parent.tag == "enemy")
             {
+                // get the enemy Animator and set weapon hold animState
                 animator = transform.parent.parent.GetComponentInChildren<Animator>();
-
                 if (animator)
                 {
                     animator.SetBool(animBoolName, true);
-                    // Debug.Log("Found Enemy Animator");
                 }
                 else
                 {
@@ -144,14 +152,13 @@ public class WeaponClass : MonoBehaviour
                 }
 
                 meleeCollider = transform.parent.parent.GetChild(2).GetComponent<BoxCollider>();
-
                 if (meleeCollider)
                 {
                     Debug.Log(gameObject.name + "Found melee collider");
                 }
                 else
                 {
-                    Debug.Log(gameObject.name + "Melee collider not found, check GetChild index line 114");
+                    Debug.Log(gameObject.name + "Enemy melee collider not found, check GetChild index line 153");
                 }
             }
         }
