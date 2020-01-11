@@ -57,10 +57,11 @@ public class PointManager : MonoBehaviour
 
         if (totalScoreText !=null)
         {
-            totalScore += EnemyPointsValue;
-            totalScoreText.text = totalScore.ToString() + "PTS";
+            // totalScore += EnemyPointsValue;
+            // totalScoreText.text = totalScore.ToString() + "PTS";
+            StartCoroutine(CountPoints(EnemyPointsValue));
         }
-        }
+    }
 
     public void AddComboCount()
     {
@@ -107,9 +108,19 @@ public class PointManager : MonoBehaviour
         textObject.GetComponent<TextMeshProUGUI>().text = ComboCount + "X COMBO";
 
         //Add to overall score
-        totalScore += totalComboPoints;
+        StartCoroutine(CountPoints(totalComboPoints));
 
         // Reset Combo Count
         ComboCount = 0;
+    }
+
+    IEnumerator CountPoints(int NewPoints)
+    {
+        for(int i = 0; i < NewPoints; i += 3)
+        {
+            totalScore += 3;
+            totalScoreText.text = totalScore.ToString() + "PTS";
+            yield return null;
+        }
     }
 }
