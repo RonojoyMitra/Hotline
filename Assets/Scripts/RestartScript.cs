@@ -5,21 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class RestartScript : MonoBehaviour
 {
-    [SerializeField] HealthComponent playerHealthComp;
-    [SerializeField] GameObject MusicPlayer;
+    HealthComponent playerHealthComp;
+
+    private static GameObject RestartManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(MusicPlayer)
+        if(RestartManager == null)
         {
-            DontDestroyOnLoad(MusicPlayer);
+            RestartManager = this.gameObject;
+            DontDestroyOnLoad(RestartManager);
         }
-        
-        if(!playerHealthComp)
+        else
         {
-            Debug.Log("Restart script could not find player healthcomp");
-        }
+            if(RestartManager != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }           
     }
 
     // Update is called once per frame
@@ -27,7 +31,7 @@ public class RestartScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            if(playerHealthComp.IsDead)
+            if(GameObject.FindGameObjectWithTag("Player").GetComponent<HealthComponent>().IsDead)
             {
                 SceneManager.LoadScene(2);
             }

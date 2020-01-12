@@ -41,7 +41,7 @@ public class EnemyMovementScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("healthComp NOT found on: " + this.gameObject.name);
+            Debug.Log("HealthComp NOT found on: " + this.gameObject.name);
         }
 
         GameObject tempWeapon = Instantiate(weaponPrefab);
@@ -65,7 +65,7 @@ public class EnemyMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!healthComp.IsDead)
+        if(!healthComp.IsDead && !Player.GetComponent<HealthComponent>().IsDead)
         {
             LookForPlayer();
 
